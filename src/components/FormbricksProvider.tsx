@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, Suspense, useRef } from "react";
+import { useEffect, Suspense, useRef, useState } from "react";
 import formbricks from "@formbricks/js";
 import { usePathname, useSearchParams } from "next/navigation";
 import * as CookieConsent from "vanilla-cookieconsent";
@@ -9,19 +9,33 @@ import "vanilla-cookieconsent/dist/cookieconsent.css";
 function CookieAndFormProvider() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const isInitialized = useRef(false);
+    const [isInitialized, setIsInitialized] = useState(false);
+    const formbricksSetupDone = useRef(false);
+    const cookieConsentRunDone = useRef(false);
 
     useEffect(() => {
-        const initFormbricks = () => {
-            if (!isInitialized.current) {
-                formbricks.setup({
-                    environmentId: process.env.NEXT_PUBLIC_FORMBRICKS_ENVIRONMENT_ID || "cmlmb7g9e0007li01qxz5h3k3",
-                    appUrl: process.env.NEXT_PUBLIC_FORMBRICKS_API_HOST || "https://forms.agenciajuri.com.br",
-                });
-                isInitialized.current = true;
-                formbricks?.registerRouteChange();
+        const initFormbricks = async () => {
+            if (!formbricksSetupDone.current) {
+                try {
+                    formbricksSetupDone.current = true;
+                    await formbricks.setup({
+                        environmentId: process.env.NEXT_PUBLIC_FORMBRICKS_ENVIRONMENT_ID || "cmlmb7g9e0007li01qxz5h3k3",
+                        appUrl: process.env.NEXT_PUBLIC_FORMBRICKS_API_HOST || "https://forms.agenciajuri.com.br",
+                    });
+                    setIsInitialized(true);
+                    await formbricks?.registerRouteChange();
+                    console.log("[Formbricks] Analytics inicializado com sucesso e rota registrada.");
+                } catch (error) {
+                    console.error("[Formbricks] Erro ao inicializar:", error);
+                    formbricksSetupDone.current = false;
+                }
             }
         };
+
+        if (cookieConsentRunDone.current) {
+            return;
+        }
+        cookieConsentRunDone.current = true;
 
         CookieConsent.run({
             categories: {
@@ -99,10 +113,10 @@ function CookieAndFormProvider() {
     }, []);
 
     useEffect(() => {
-        if (isInitialized.current) {
+        if (isInitialized) {
             formbricks?.registerRouteChange();
         }
-    }, [pathname, searchParams]);
+    }, [pathname, searchParams, isInitialized]);
 
     return null;
 }
