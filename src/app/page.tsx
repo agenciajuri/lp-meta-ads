@@ -9,7 +9,7 @@ export default function Home() {
       <header className="fixed w-full bg-white/95 backdrop-blur-md z-50 border-b border-gray-100 shadow-sm pt-[env(safe-area-inset-top)] top-0 left-0 right-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
           <div className="flex-shrink-0">
-            <Image src="/logo-1.svg" alt="Agência Juri" width={140} height={40} priority className="h-8 md:h-10 w-auto" />
+            <Image src="/logo-1.svg" alt="Agência Juri" width={140} height={40} priority className="h-8 md:h-10 w-auto scale-[3] origin-left" />
           </div>
           <nav className="flex items-center gap-4">
             <a href="#solucao" className="hidden md:block text-gray-600 hover:text-charcoal-gray font-medium transition">Nossos Serviços</a>
@@ -175,7 +175,7 @@ export default function Home() {
       <footer className="bg-white border-t border-gray-200 py-10 md:py-12 px-4 sm:px-6 lg:px-8 pb-[max(env(safe-area-inset-bottom),_2.5rem)]">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-6 md:gap-8">
           <div className="bg-white p-2 border border-gray-100 rounded-lg">
-            <Image src="/logo-1.svg" alt="Agência Juri" width={140} height={40} className="opacity-90 grayscale hover:grayscale-0 transition h-8 w-auto" />
+            <Image src="/logo-1.svg" alt="Agência Juri" width={140} height={40} className="opacity-90 grayscale hover:grayscale-0 transition h-8 w-auto scale-[3]" />
           </div>
           <p className="text-[11px] md:text-xs text-gray-400 max-w-3xl leading-relaxed px-2 md:px-0">
             * Este material tem caráter exclusivamente informativo e visa instruir sobre marketing e automação empresarial direcionada ao setor jurídico. Não configuramos escritório de advocacia, não prestamos serviços jurídicos e a metodologia aqui exposta não promete resultados garantidos ou incentiva a mercantilização e a captação indevida de clientela, respeitando integralmente as balizas do Provimento 205/2021 da OAB.

@@ -15,8 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Agência Juri - Maximize seus Honorários",
-  description: "Estratégias de automação e captação para advogados.",
+  title: "Captação de Clientes para Advogados | Agência Juri",
+  description: "Fazemos o marketing do seu escritório. Anúncios no Meta e Google, sites focados em venda e contatos direto no seu WhatsApp. 100% dentro da OAB.",
   icons: {
     icon: [
       { url: "/favicon.ico" },
